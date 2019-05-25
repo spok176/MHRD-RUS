@@ -1,0 +1,5 @@
+So you created some basic logic elements, but ANDs and ORs a CPU do not make! Don't get me wrong... we couldn't build a CPU without them, but let's package them up to more powerful logic.
+
+I got you some specs for elements, which enable us to add up numbers and have conditional logic... create the designs and we will have our ALU in no time!
+
+Will  

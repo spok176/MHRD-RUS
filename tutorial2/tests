@@ -1,0 +1,5 @@
+Tests:
+  0->in1, 0->in2, out->1;
+  0->in1, 1->in2, out->1;
+  1->in1, 0->in2, out->1;
+  1->in1, 1->in2, out->0;

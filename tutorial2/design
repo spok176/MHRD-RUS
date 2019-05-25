@@ -1,0 +1,35 @@
+// Спецификация интерфейса NAND Gate(вентиля):
+Inputs: in1, in2;
+Outputs: out;
+
+// Now to build a NAND gate based on a NAND gate is kind
+// of pointless in the bigger scheme of things, but here
+// is how it would look like:
+//
+//       +----------+
+//       |  ______  |          
+//  -in1-|-|      | |
+//       | | NAND |-|--out-
+//  -in2-|-|______| |
+//       +----------+
+
+// Now between the interface and the "Wires" section there
+// is a "Parts" section where you need to specify which
+// parts are used within your design
+Parts:
+  myNand NAND
+;
+// so the syntax here is:
+// [id] [part_type]
+// вы можете выбрать идентификатор, но тип детали должен быть в 
+// завершенном разделе проектов, 
+// например, с проводами, объявить столько устройств, сколько вы хотите использовать
+
+Wires:
+  in1 -> myNand.in1, in2 -> myNand.in2,
+  myNand.out -> out
+;
+// so you can connect the element's pins to the pins of the NAND
+// make sure to reference the right part via its id, you declared
+
+// еще раз: CTRL + ENTER, чтобы проверить этот дизайн, если вы хотите

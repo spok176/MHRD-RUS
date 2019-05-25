@@ -1,0 +1,10 @@
+We have come a long way!
+
+We finally got all elements necessary to build our Microhard CPU! Our CPU consists (roughly speaking) of an ALU and a couple of registers. All that is left is to wire those things up, which is easier said then done.
+
+Building the CPU is a two step process... first you should design the decoder and second the CPU itself. However to be able to understand each single element, you have to understand both and how they act together. Start out by studying both specs provided.
+
+This is the final step we need to complete in order to to take action on the market! Everything stands and falls with this design! We all put our hopes and dreams in your hands! This could change the world! 
+
+No pressure,
+Will

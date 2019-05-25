@@ -1,0 +1,12 @@
+Урок 2 - Спецификация
+==========================
+
+Описание:
+------------
+Tutorial 1 showed you have basic wiring works, but this won't get you far. To build interesting designs you have to reuse other elements however.
+
+In this tutorial we will build a NAND gate based on a NAND gate... for educational purposes only, of course!
+
+Usually this specification would explain what a NAND gate does, but you'll find the NAND gate specification in the "Completed" designs section in the explorer. Head over there, read it and get back to the "Design" tab of this tutorial!  
+
+После завершения этого урока попробуйте спроектировать вентиль NOT в папке «Задачи /», если вы еще этого не сделали!

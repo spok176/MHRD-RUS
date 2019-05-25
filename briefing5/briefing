@@ -1,0 +1,7 @@
+The best CPU in the world isn't worth a whole lot, if you can't save the program that drives it or the results it produces.
+
+Something that all the hardware elements you designed so far have in common is the absence of memory. We need to change this. That is why I got a business associate to source some sweet D-Flip-Flops!
+
+When designing sequential elements make sure you consider the timing aspect... check out the chapter on sequential logic in the manual and have a look at the spec sheet for the D-Flip-Flop under the "Completed/" folder.
+
+Will 

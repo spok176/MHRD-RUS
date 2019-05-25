@@ -1,0 +1,7 @@
+Great stuff! We're getting closer to blowing up the CPU market place step by step, design by design...
+
+As you might know the actual computations a CPU performs are done by its ALU (algorithmic logic unit) and the exciting thing is: we basically got everything together we need to build our own ALU. You just need to wire it up.
+
+At the risk of repeating myself: Make sure you draw out your design on paper first!
+
+Will 

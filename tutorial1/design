@@ -1,0 +1,39 @@
+// Дизайн всегда начинается с интерфейса
+// который всегда соответствует спецификации
+Inputs: in1, in2;
+Outputs: out1, out2;
+
+// btw... lines starting with "//" are comments and
+// are not considered in the verification process
+
+// the specification says, that the outputs have to
+// have the same values as the inputs, but switched...
+// this can be done by connecting in1 to out2 and
+// connecting in2 to out1.
+
+// if you drew this... it would look something like this:
+//
+//       +-------+           
+//  -in1-|--\ /--|--out1-
+//       |   X   |    
+//  -in2-|--/ \--|--out2-
+//       +-------+     
+
+Wires:
+// однако вы должны сказать симулятору, 
+// что делать в соответствии со спецификацией синтаксиса...
+// это означает, что вы должны написать:
+  in1 -> out2,
+  in2 -> out1
+;
+
+// So the syntax for wiring is basically:
+// [start_pin] -> [end_pin]
+// you can specify as many wires as you like, but you
+// have to separate them by commas
+// after the last wire you have to put a semicolon
+
+// try pressing CTRL+ENTER... this will tell you that
+// this design passed verification
+
+// you can mess with the design to make the verification fail

@@ -1,0 +1,20 @@
+Welcome aboard!
+
+One man once said: Giants are not what we think they are. The same qualities that appear to give them strength are often the sources of great weakness.
+
+We at Microhard firmly believe that the modern CPUs available in the market place are far more complex than what is good for them. By having complex instruction sets and downward compatibility the giants of the tech industry trade legacy for efficiency. These circumstances provide us at Microhard with an opportunity to disrupt the tech industry by providing a low-cost, high-efficiency CPU alternative. I am glad that I could win you over as an hardware engineer for our endeavour.
+
+Your job will be to design various hardware elements we need in order to build our CPU. You will be provided with specifications and verification tests for the elements you have to design. If you ever feel lost or overwhelmed, don't panic... make sure you remember these three tips:
+
+1. If you don't know what to do: Read the manual and specifications!
+2. When creating your design: Draw it out on a piece of paper! No one ever
+   created something great just by looking at his screen...
+3. If something is wrong with your design: Inspect the error messages and failed
+   tests closely to find out where the problem is.
+
+Keep these in mind... they will come in handy sooner rather than later!
+
+Your first task will be to develop a NOT gate. You can find the task under the "Tasks/" folder in the explorer to your left. You maybe want to check out the manual first however...
+
+I'm looking forward to working together,
+Will
