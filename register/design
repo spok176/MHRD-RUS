@@ -1,0 +1,8 @@
+Inputs: in, load;
+Outputs: out;
+
+// 1. specify the components you want to use here
+Parts: ;
+
+// 2. wire them up
+Wires: ;

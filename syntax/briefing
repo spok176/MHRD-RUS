@@ -1,0 +1,102 @@
+Синтаксис дизайна
+=============
+
+В этой главе объясняется синтаксис, используемый для создания дизайнов. Это делается путем показа некоторых примеров и последующей спецификации синтаксиса.
+
+Pins:
+-----
+
+Входы и выходы имеют произвольно выбранный идентификатор, например:
+  Inputs: inPin1, inPin2, abc;
+  Outputs: outPin1, outPin2, outPin3, outPin4, def;
+
+Части состоят из произвольно выбранного идентификатора, за которым следует тип детали в верхнем регистре:
+  Parts: myNand NAND, myNot NOT, anotherNand NAND, andAnAnd AND;
+
+Провода могут подключаться:
+  Wires:
+    inPin1 -> outPin1,       //inputs to outputs
+    inPin1 -> myNot.in,      //inputs to part-inputs
+    myNot.out -> outPin2,    //part-outputs to outputs
+    myNot.out -> myNand.in1, //part-outputs to part-inputs
+    1 -> outPin3,            //constants to output
+    0 -> myNand.in2;         //constants to part-inputs
+
+Только «1» или «0» могут быть использованы в качестве константы. Если к какому-либо входному выводу не подключен провод, он автоматически получит вход «0».
+	
+Busses:
+-------
+
+В примерах до сих пор использовались только pins. Если в проекте нужно использовать много выводов, вместо них можно использовать шины. Чтобы определить шину, содержащую несколько контактов, можно написать:
+  Inputs: inBus1[8], inBus2[8], inBusWide[16], inPin1;
+  Outputs: outBus1[8], outBus2[8], outBusWide[16], outPin;
+Таким образом, например inBus1 - это шина с шириной шины 8 (что означает, что она содержит 8 отдельных выводов), а inBusWide имеет ширину шины 16.
+
+При указании проводов в разделе "Wires", могут быть подключены шины одинакового размера:
+  inBus1 -> outBus1
+
+Отдельные контакты внутри шины также могут быть выбраны и подключены:
+  inBus1[3] -> outPin
+Соединяет третий pin inBus1 с outPin. Note that inBus1[3] represents a single pin in the "Wires"-section, while in the "Inputs"- and "Outputs"-section it would define a bus of size three. Also note that the numbering of the pins starts with "1" (no zero-based index).
+
+It is possible to select not only a pin, but also a sub-bus of a bus:
+  inBus1 -> outBusWide[9:16]
+  inBus1[1:8] -> outBusWide[9:16]
+Обе строки означают одно и то же. This connects inBus1[1] with outBusWide[9], inBus1[2] with outBusWide[10], etc. up to inBus1[8] with outBusWide[16].
+
+A single pin can also be connected to a (sub-)bus (not vice versa). In this case the pin connects to all pins of that (sub-)bus
+  inPin1 -> outBus1[2:4] //connects to sub-bus [2:4] 
+  inPin1 -> outBus2      //connects to complete bus
+
+При работе с шинами важно знать правильное обозначение значений. Допустим, у вас есть шина "bus[8]" со значением "00001111". Это означает, что вывод «bus[1]» имеет значение «1», а вывод «bus[8]» имеет значение «0». Поэтому вы читаете отдельные выводы справа налево, когда они записаны в виде двоичного числа.
+
+Formal Specification:
+---------------------
+
+Конструкция состоит из разделов "Inputs", "Outputs", "Parts" и "Wires":
+[design] = [input_section] [output_section] [part_section] [wire_section]
+
+Каждый раздел начинается с соответствующего идентификатора раздела, за которым следует двоеточие, один или несколько соответствующих элементов и заканчивается точкой с запятой: 
+[input_section]  = "Inputs:"  [input] (, [input])* ";"
+[output_section] = "Outputs:" [output] (, [output])* ";"
+[part_section]   = "Parts:"   [part] (, [part])* ";"
+[wire_section]   = "Wires:"   [wire] (, [wire])* ";"
+
+Входы и выходы могут быть либо одиночными выводами (в этом случае они состоят из простого идентификатора), либо шинами (в этом случае должна быть указана их ширина шины).
+[input]  = [input_pin_id]  | ([input_bus_id][bus_size])
+[output] = [output_pin_id] | ([output_bus_id][bus_size])
+
+Идентификаторы должны начинаться с буквы, за которой может следовать произвольное количество букв или цифр:
+[input_pin_id]  = [id]
+[output_pin_id] = [id]
+[input_bus_id]  = [id]
+[output_bus_id] = [id]
+[id]            = [letter] ([letter | digit])*
+[letter]        = "a"|...|"Z"
+[digit]         = "0"|...|"9"
+
+Размер шины указан в квадратных скобках. Номер имеет хотя бы одну цифру.
+[bus_size] = "[" [number] "]"
+[number]   = [digit]+
+
+Детали могут быть записаны в виде пар идентификаторов деталей и типов деталей. Типы деталей всегда в верхнем регистре:
+[part]             = [part_id] [part_type]
+[part_id]          = [id]
+[part_type]        = [uppercase_letter] ([uppercase_letter | digit])*
+[uppercase_letter] = ("A"|...|"Z")
+
+Wires имеют начало и конец. Start and end can be regular pins, busses of the designed element or of its parts:
+[wire]  = [start] "->" [end]
+[start] = [pin_value] | [input_pin] | [input_bus] | [part_id]"."[output_pin] | [part_id]"."[output_bus]
+[end]   = [output_pin] | [output_bus] | [part_id]"."[input_pin] | [part_id]"."[input_bus]
+
+Контакт может быть либо ссылкой на идентификатор контакта, либо на конкретный контакт внутри шины:
+[pin_value] = "0" | "1"
+[input_pin]  = [input_pin_id] | [input_bus_id][pin_selection]
+[output_pin] = [output_pin_id] | [output_bus_id][pin_selection]
+[pin_selection] = "[" [number] "]"
+
+Шина может быть либо ссылкой на идентификатор шины, либо группой выводов внутри шины:
+[input_bus]  = [input_bus_id] | [input_bus_id][bus_selection]
+[output_bus] = [output_bus_id] | [output_bus_id][bus_selection]
+[bus_selection] = "[" [number] ":" [number] "]"
